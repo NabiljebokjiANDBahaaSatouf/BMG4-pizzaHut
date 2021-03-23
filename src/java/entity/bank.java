@@ -59,7 +59,7 @@ public class bank {
     }
 
     @Override
-    public String toString()  {
+    public String toString()   {
         return "bank{" + "bank_id=" + bank_id + ", payments_id=" + payments_id + ", amount=" + amount + ", cridit_card_type=" + cridit_card_type + '}';
     }
 
