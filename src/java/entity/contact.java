@@ -11,7 +11,7 @@ package entity;
  */
 public class contact {
     
-      private int contact_id;
+     private int contact_id;
     private int restaurant_id;
     private String name;
     private String Address;
