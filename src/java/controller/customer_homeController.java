@@ -70,8 +70,6 @@ public class customer_homeController implements Serializable {
 
     }
 
-    
-
     public customer_homeController() {
         this.cList = new ArrayList();
         cdao = new customer_homeDAO();

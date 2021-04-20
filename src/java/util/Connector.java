@@ -21,7 +21,7 @@ public class Connector {
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzahot?user=root&password=123");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzahut?user=root&password=123");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

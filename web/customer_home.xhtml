@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Customer Home</title>
+        <h:outputStylesheet library ="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <h:form>  
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="logout" value="logout"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="bank" value="Bank"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="cash" value="cash"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="contact" value="contact"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="customer_table" value="customer_table"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="customer_home" value="customer_home"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="delivery" value="delivery"/>
+                            </li> 
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="orderr" value="orderr"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="payments" value="payments"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="restaurant" value="restaurant"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="table_order" value="table_order"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="to_home" value="to_home"/>
+                            </li>
+
+                        </ul> 
+                    </h:form>
+                </div>
+            </nav>
+        </div>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-7">
+                    <h:form id="category-table" >
+                        <h:dataTable class=" table table-striped" value="#{customer_homeController.CList}" var="cat">
+                            <h:column >
+                                <f:facet name="header">ID</f:facet>
+                                    #{cat.customer_home_id}
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Restaurant_id</f:facet>
+                                    #{cat.restaurant.restaurant_id}
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Name</f:facet>
+                                <h:commandLink  value="#{cat.name}">
+                                   
+                                </h:commandLink>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Address</f:facet>
+                                <h:commandLink  value="#{cat.address}">
+                               
+                                </h:commandLink>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Email</f:facet>
+                                <h:commandLink  value="#{cat.email}">
+                                </h:commandLink>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Phone</f:facet>
+                                <h:commandLink value="#{cat.phone}">
+                                  
+                                </h:commandLink>
+                            </h:column>
+                             </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-md-5">
+                    <h:form id ="category-form">
+                        <div class="form-group">
+
+                            <h:inputHidden value="#{customer_homeController.category.customer_home_id}"/>
+
+                            <label for="input Name">Customer ID :</label>
+                            <h:inputText styleClass="form-control" value="#{customer_homeController.category.customer_home_id}"/>
+                            <label for="input Name">Restaurant_id :</label>
+                            <h:selectOneMenu styleClass="custom-select" id="selectrestaurant" value="#{customer_homeController.selectedrestaurant}">
+                                <f:selectItems value="#{customer_homeController.restaurantlist}" var="restaurant" itemValue="#{restaurant.restaurant_id}" itemLabel="#{restaurant.restaurant_id}"/>
+                            </h:selectOneMenu>                         
+                            <label for="input Name">Name :</label>
+                            <h:inputText styleClass="form-control" value="#{customer_homeController.category.name}"/>
+                            <label for="input Name">Address :</label>
+                            <h:inputText styleClass="form-control" value="#{customer_homeController.category.address}"/>
+                            <label for="input Name">Email :</label>
+                            <h:inputText styleClass="form-control" value="#{customer_homeController.category.email}"/>
+                            <label for="input Name">Phone :</label>
+                            <h:inputText styleClass="form-control" value="#{customer_homeController.category.phone}"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <h:commandButton  class="btn btn-primary" value="Create" action="#{customer_homeController.create()}">
+                                </h:commandButton>
+                            </div>
+                        </div>                
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+
+</html>
+

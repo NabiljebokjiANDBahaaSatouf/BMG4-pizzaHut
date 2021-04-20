@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>table_order</title>
+        <h:outputStylesheet library ="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <h:form>  
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="logout" value="logout"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="bank" value="Bank"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="cash" value="cash"/>
+                            </li>
+                            <li class="nav-item">
+                                <h:commandLink styleClass="nav-link" action="contact" value="contact"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="customer_table" value="customer_table"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="customer_home" value="customer_home"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="delivery" value="delivery"/>
+                            </li> 
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="orderr" value="orderr"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="payments" value="payments"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="restaurant" value="restaurant"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="table_order" value="table_order"/>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink styleClass="nav-link" action="to_home" value="to_home"/>
+                            </li>
+
+                        </ul> 
+                    </h:form>
+                </div>
+            </nav>
+        </div>
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-7">
+                    <h:form id="category-table" >
+                        <h:dataTable class=" table table-striped" value="#{table_orderController.CList}" var="cat">
+                            <h:column >
+                                <f:facet name="header">ID</f:facet>
+                                    #{cat.table_id}
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">table_number</f:facet>
+                                <h:commandLink value="#{cat.table_number}">
+                                   
+                                </h:commandLink>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">orderr_id</f:facet>
+                                <h:commandLink value="#{cat.orderr_id}">
+                                   
+                                </h:commandLink>
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-md-4">
+                    <h:form id ="category-form">
+                        <div class="form-group">
+
+                            <h:inputHidden value="#{table_orderController.category.table_id}"/>
+
+                            <label for="input Name"> ID :</label>
+                            <h:inputText styleClass="form-control" value="#{table_orderController.category.table_id}"/>
+                            <label for="input Name">orderr_id :</label>
+                            <h:inputText styleClass="form-control" value="#{table_orderController.category.orderr_id}"/>
+                            <label for="input Name">table_number :</label>
+                            <h:inputText styleClass="form-control" value="#{table_orderController.category.table_number}"/>
+                            
+                        </div>
+                        <div class="form-group">
+                            <div class="btn-group">
+                                
+                                <h:commandButton  class="btn btn-primary" value="Create" action="#{table_orderController.create()}">
+
+                                </h:commandButton>
+                            </div>
+                        </div>                
+                    </h:form>
+                </div>
+            </div>
+            
+        </div>
+    </h:body>
+
+
+</html>
+
