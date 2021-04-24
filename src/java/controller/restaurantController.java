@@ -1,3 +1,4 @@
+
 package controller;
 
 import dao.restaurantDAO;
@@ -15,15 +16,37 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class restaurantController implements Serializable {
-
+   
     private restaurant restaurant;
     private List<restaurant> cList;
     private restaurantDAO restaurantdao;
+
+
+    public void updateFrom(restaurant cat) {
+        this.restaurant = cat;
+    }
+
+    public void update() {
+        this.getRestaurantdao().update(this.restaurant);
+        this.restaurant = new restaurant();
+    }
 
     public String clearForm() {
         this.restaurant = new restaurant();
         return "restaurant";
     }
+
+    public String delete( ) {
+        this.getRestaurantdao().delete(this.restaurant);
+        this.restaurant = new restaurant();
+        return "restaurant";
+    }
+    
+     public String deleteConfirm(restaurant cat) {
+        this.restaurant = cat;
+        return "delete_restaurant";
+    }
+
 
     public void create() {
         this.getRestaurantdao().insert(this.restaurant);

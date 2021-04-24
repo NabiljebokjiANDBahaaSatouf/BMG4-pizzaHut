@@ -49,7 +49,6 @@
                             <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="to_home" value="to_home"/>
                             </li>
-
                         </ul> 
                     </h:form>
                 </div>
@@ -66,17 +65,22 @@
                             </h:column>
                             <h:column >
                                 <f:facet name="header">restaurant_id</f:facet>
-                                <h:commandLink  value="#{cat.restaurant_id}">
-                                 
+                                <h:commandLink action="#{restaurantController.updateFrom(cat)}" value="#{cat.restaurant_id}">
+
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">branch</f:facet>
-                                <h:commandLink  value="#{cat.branch}">
-                                   
+                                <h:commandLink action="#{restaurantController.updateFrom(cat)}" value="#{cat.branch}">
+
                                 </h:commandLink>
                             </h:column>
-                            
+                            <h:column >
+                                <f:facet name="header">Delete</f:facet>
+                                <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{restaurantController.deleteConfirm(cat)}">
+
+                                </h:commandButton>
+                            </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>
@@ -94,16 +98,39 @@
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{restaurantController.update()}">
+
+                                </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{restaurantController.create()}">
-                                    
+
                                 </h:commandButton>
                             </div>
                         </div>                
                     </h:form>
                 </div>
             </div>
+            <div class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-model">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Conformation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <h:form>
+                                <h:commandButton action="#{restaurantController.delete}" value="Confirm" styleClass="btn btn-danger">
+
+                                </h:commandButton>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
         </div>
     </h:body>
+
 </html>
 

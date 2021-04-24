@@ -1,7 +1,7 @@
 /*
-             * To change this license header, choose License Headers in Project Properties.
-             * To change this template file, choose Tools | Templates
-             * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -13,15 +13,35 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+/**
+ *
+ * @author nabilo
+ */
 @Named
 @SessionScoped
 public class cashController implements Serializable {
 
     private List<cash> cList;
     private cashDAO cdao;
+
     private cash cash;
 
+    public void updateFrom(cash cat) {
+        this.cash = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.cash);
+        this.cash = new cash();
+    }
+
     public String clearForm() {
+        this.cash = new cash();
+        return "cash";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.cash);
         this.cash = new cash();
         return "cash";
     }
@@ -31,15 +51,20 @@ public class cashController implements Serializable {
         this.cash = new cash();
 
     }
-
-    public List<cash> getCList() {
-        this.cList = this.getCdao().getCategories();
-        return cList;
+    
+    public String deleteConfirm(cash cat) {
+        this.cash = cat;
+        return "delete_cash";
     }
 
     public cashController() {
         this.cList = new ArrayList();
         cdao = new cashDAO();
+    }
+
+    public List<cash> getCList() {
+        this.cList = this.getCdao().getCategories();
+        return cList;
     }
 
     public void setcList(List<cash> cList) {

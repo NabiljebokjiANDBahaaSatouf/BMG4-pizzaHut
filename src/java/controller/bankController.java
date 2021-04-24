@@ -25,8 +25,22 @@ public class bankController implements Serializable {
     private bankDAO cdao;
     private bank bank;
 
-  
+    public void updateFrom(bank cat) {
+        this.bank = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.bank);
+        this.bank = new bank();
+    }
+
     public String clearForm() {
+        this.bank = new bank();
+        return "bank";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.bank);
         this.bank = new bank();
         return "bank";
     }
@@ -36,6 +50,12 @@ public class bankController implements Serializable {
         this.bank = new bank();
 
     }
+    
+     public String deleteConfirm(bank cat) {
+        this.bank = cat;
+        return "delete_bank";
+    }
+
     public bankController() {
         this.cList = new ArrayList();
         cdao = new bankDAO();

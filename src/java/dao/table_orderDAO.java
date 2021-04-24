@@ -1,10 +1,11 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
+import entity.customer_table;
 import entity.table_order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,9 +29,9 @@ public class table_orderDAO {
         List<table_order> CategoryList = new ArrayList();
         try {
             /*
-                    Connection
-                    Statement
-                    ResultSet
+            Connection
+            Statement
+            ResultSet
              */
             Statement st = this.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select * from table_order");
@@ -68,6 +69,25 @@ public class table_orderDAO {
         }
     }
 
+    public void delete(table_order cat) {
+
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from table_order where table_id =" + cat.getTable_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(table_order table_order) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update table_order set table_number='" + table_order.getTable_number() + "'where table_id=" + table_order.getTable_id());
+            st.executeUpdate("update table_order set orderr_id='" + table_order.getOrderr_id() + "'where table_id=" + table_order.getTable_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     public Connector getConnector() {
         if (this.connector == null) {
             this.connector = new Connector();

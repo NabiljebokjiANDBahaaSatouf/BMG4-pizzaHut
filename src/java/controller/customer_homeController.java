@@ -59,15 +59,36 @@ public class customer_homeController implements Serializable {
         this.restaurantlist = restaurantlist;
     }
 
+    public void updateFrom(customer_home cat) {
+        this.customer_home = cat;
+        this.selectedrestaurant = this.customer_home.getRestaurant().getRestaurant_id();
+    }
+
+    public void update() {
+        this.getCdao().update(this.customer_home, selectedrestaurant);
+        this.customer_home = new customer_home();
+    }
+
     public String clearForm() {
         this.customer_home = new customer_home();
         return "customer_home";
     }
 
+    public String delete() {
+        this.getCdao().delete(this.customer_home);
+        this.customer_home = new customer_home();
+        return "customer_home";
+    }
+
     public void create() {
-        this.getCdao().insert(this.customer_home, selectedrestaurant);
+        this.getCdao().insert(this.customer_home,selectedrestaurant);
         this.customer_home = new customer_home();
 
+    }
+
+    public String deleteConfirm(customer_home cat) {
+        this.customer_home = cat;
+        return "delete_customer_home";
     }
 
     public customer_homeController() {

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>table_order</title>
+        <h:outputStylesheet library ="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h:form>
+                Are you sure you want to delete? 
+                <pre>
+                    <br>ID : #{table_orderController.category.table_id} </br><br/>
+                    <br>table_id : </br>#{table_orderController.category.orderr_id}<br/>
+                    <br>table_number  : #{table_orderController.category.table_number}</br><br/>
+                    <div class="btn-group">
+                    <h:commandButton styleClass="btn btn-dark" action="table_order" value="Cancel"/>
+                    <h:commandButton styleClass="btn btn-danger" action="#{table_orderController.delete}" value="Delete"/>
+                    </div>
+                </pre>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

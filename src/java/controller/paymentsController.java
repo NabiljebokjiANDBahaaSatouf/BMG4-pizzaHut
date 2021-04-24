@@ -1,16 +1,18 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.paymentsDAO;
+import entity.cash;
 import entity.payments;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -25,9 +27,30 @@ public class paymentsController implements Serializable {
     private paymentsDAO cdao;
     private payments payments;
 
+    public void updateFrom(payments cat) {
+        this.payments = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.payments);
+        this.payments = new payments();
+    }
+
     public String clearForm() {
         this.payments = new payments();
         return "payments";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.payments);
+        this.payments = new payments();
+        return "payments";
+
+    }
+
+    public String deleteConfirm(payments cat) {
+        this.payments = cat;
+        return "delete_payments";
     }
 
     public void create() {
@@ -80,4 +103,5 @@ public class paymentsController implements Serializable {
         this.payments = payments;
     }
 
+  
 }

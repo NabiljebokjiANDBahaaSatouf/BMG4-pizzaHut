@@ -21,9 +21,30 @@ public class deliveryController implements Serializable {
 
     private delivery delivery;
 
+    public void updateFrom(delivery cat) {
+        this.delivery = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.delivery);
+        this.delivery = new delivery();
+    }
+
     public String clearForm() {
         this.delivery = new delivery();
         return "delivery";
+    }
+
+    public String deleteConfirm(delivery cat) {
+        this.delivery = cat;
+        return "delete_delivery";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.delivery);
+        this.delivery = new delivery();
+        return "delivery";
+
     }
 
     public void create() {

@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -26,9 +26,30 @@ public class to_homeController implements Serializable {
 
     private to_home to_home;
 
+    public void updateFrom(to_home cat) {
+        this.to_home = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.to_home);
+        this.to_home = new to_home();
+    }
+
     public String clearForm() {
         this.to_home = new to_home();
         return "to_home";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.to_home);
+        this.to_home = new to_home();
+        return "to_home";
+
+    }
+
+    public String deleteConfirm(to_home cat) {
+        this.to_home = cat;
+        return "delete_to_home";
     }
 
     public void create() {

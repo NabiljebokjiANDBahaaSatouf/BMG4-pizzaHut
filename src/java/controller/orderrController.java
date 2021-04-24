@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -30,26 +30,6 @@ public class orderrController implements Serializable {
     private restaurantDAO restaurantdao;
     private List<restaurant> restaurantlist;
 
-    public String clearForm() {
-        this.orderr = new orderr();
-        return "orderr";
-    }
-
-    public void create() {
-        this.getCdao().insert(this.orderr, selectedrestaurant);
-        this.orderr = new orderr();
-    }
-
-    public orderrController() {
-        this.cList = new ArrayList();
-        cdao = new orderrDAO();
-    }
-
-    public List<orderr> getCList() {
-        this.cList = this.getCdao().findALL();
-        return cList;
-    }
-
     public int getSelectedrestaurant() {
         return selectedrestaurant;
     }
@@ -76,6 +56,49 @@ public class orderrController implements Serializable {
 
     public void setRestaurantlist(List<restaurant> restaurantlist) {
         this.restaurantlist = restaurantlist;
+    }
+
+    public void updateFrom(orderr cat) {
+        this.orderr = cat;
+        this.selectedrestaurant = this.orderr.getRestaurant().getRestaurant_id();
+
+    }
+
+    public void update() {
+        this.getCdao().update(this.orderr, selectedrestaurant);
+        this.orderr = new orderr();
+    }
+
+    public String clearForm() {
+        this.orderr = new orderr();
+        return "orderr";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.orderr);
+        this.orderr = new orderr();
+        return "orderr";
+
+    }
+
+    public String deleteConfirm(orderr cat) {
+        this.orderr = cat;
+        return "delete_orderr";
+    }
+
+    public void create() {
+        this.getCdao().insert(this.orderr, selectedrestaurant);
+        this.orderr = new orderr();
+    }
+
+    public orderrController() {
+        this.cList = new ArrayList();
+        cdao = new orderrDAO();
+    }
+
+    public List<orderr> getCList() {
+        this.cList = this.getCdao().findALL();
+        return cList;
     }
 
     public void setcList(List<orderr> cList) {

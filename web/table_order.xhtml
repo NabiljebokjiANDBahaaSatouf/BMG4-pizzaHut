@@ -66,17 +66,22 @@
                             </h:column>
                             <h:column >
                                 <f:facet name="header">table_number</f:facet>
-                                <h:commandLink value="#{cat.table_number}">
-                                   
+                                <h:commandLink action="#{table_orderController.updateFrom(cat)}" value="#{cat.table_number}">
+
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">orderr_id</f:facet>
-                                <h:commandLink value="#{cat.orderr_id}">
-                                   
+                                <h:commandLink action="#{table_orderController.updateFrom(cat)}" value="#{cat.orderr_id}">
+
                                 </h:commandLink>
                             </h:column>
-                            
+                            <h:column >
+                                <f:facet name="header">Delete</f:facet>
+                                <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{table_orderController.deleteConfirm(cat)}">
+
+                                </h:commandButton>
+                            </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>
@@ -92,11 +97,13 @@
                             <h:inputText styleClass="form-control" value="#{table_orderController.category.orderr_id}"/>
                             <label for="input Name">table_number :</label>
                             <h:inputText styleClass="form-control" value="#{table_orderController.category.table_number}"/>
-                            
+
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{table_orderController.update()}">
+
+                                </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{table_orderController.create()}">
 
                                 </h:commandButton>
@@ -105,7 +112,27 @@
                     </h:form>
                 </div>
             </div>
-            
+            <div class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <h:panelGroup layout="block" class="modal-content" id="delete-model">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Conformation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-footer">
+                            <h:form>
+                                <h:commandButton action="#{table_orderController.delete}" value="Confirm" styleClass="btn btn-danger">
+
+                                </h:commandButton>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </h:form>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </div>
         </div>
     </h:body>
 

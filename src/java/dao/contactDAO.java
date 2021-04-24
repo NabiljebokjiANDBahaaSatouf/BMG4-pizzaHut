@@ -1,11 +1,12 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
 import entity.contact;
+import entity.customer_home;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,17 +20,17 @@ import util.Connector;
  * @author nabilo
  */
 public class contactDAO {
-
-    private Connector connector;
+     private Connector connector;
     private Connection connection;
 
-    public List<contact> getCategories() {
+
+ public List<contact> getCategories() {
         List<contact> CategoryList = new ArrayList();
-        try {
+try {
             /*
-                        Connection
-                        Statement
-                        ResultSet
+            Connection
+            Statement
+            ResultSet
              */
             Statement st = this.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select * from contact");
@@ -60,7 +61,31 @@ public class contactDAO {
         }
     }
 
-    public Connector getConnector() {
+    public void delete(contact cat) {
+   
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from contact where contact_id=" + cat.getContact_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(contact contact) {
+   
+
+        try {
+
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update contact set name='" + contact.getName() + "'where contact_id=" + contact.getContact_id());
+            st.executeUpdate("update contact set address='" + contact.getAddress() + "'where contact_id=" + contact.getContact_id());
+            st.executeUpdate("update contact set phone='" + contact.getPhone() + "'where contact_id=" + contact.getContact_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+     public Connector getConnector() {
         if (this.connector == null) {
             this.connector = new Connector();
         }

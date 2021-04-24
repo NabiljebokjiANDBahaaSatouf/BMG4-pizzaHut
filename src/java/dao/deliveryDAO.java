@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -31,9 +31,9 @@ public class deliveryDAO {
         List<delivery> CategoryList = new ArrayList();
         try {
             /*
-                    Connection
-                    Statement
-                    ResultSet
+            Connection
+            Statement
+            ResultSet
              */
             Statement st = this.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select * from delivery");
@@ -78,6 +78,29 @@ public class deliveryDAO {
             pst.setInt(1, delivery.getDelivery_id());
             pst.setInt(2, delivery.getDelivery_id());
             pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+
+    public void delete(delivery cat) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from delivery where delivery_id =" + cat.getDelivery_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(delivery delivery) {
+        try {
+
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update delivery set orderr_id='" + delivery.getOrderr_id() + "'where delivery_id=" + delivery.getDelivery_id());
+            st.executeUpdate("update delivery set delivery_pickup='" + delivery.getDelivery_pickup() + "'where delivery_id=" + delivery.getDelivery_id());
+            st.executeUpdate("update delivery set time_deliverd='" + delivery.getTime_deliverd() + "'where delivery_id=" + delivery.getDelivery_id());
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 

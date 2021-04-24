@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -26,14 +26,36 @@ public class table_orderController implements Serializable {
 
     private table_order table_order;
 
+    public void updateFrom(table_order cat) {
+        this.table_order = cat;
+    }
+
+    public void update() {
+        this.getCdao().update(this.table_order);
+        this.table_order = new table_order();
+    }
+
     public String clearForm() {
         this.table_order = new table_order();
         return "table_order";
     }
 
+    public String delete() {
+        this.getCdao().delete(this.table_order);
+        this.table_order = new table_order();
+        return "table_order";
+
+    }
+
     public void create() {
         this.getCdao().insert(this.table_order);
         this.table_order = new table_order();
+    }
+
+    
+    public String deleteConfirm(table_order cat) {
+        this.table_order = cat;
+        return "delete_table_order";
     }
 
     public table_orderController() {
@@ -52,7 +74,7 @@ public class table_orderController implements Serializable {
 
     public table_orderDAO getCdao() {
         if (this.cdao == null) {
-            //            this.cdao = new table_orderDAO();
+//            this.cdao = new table_orderDAO();
         }
         return cdao;
     }

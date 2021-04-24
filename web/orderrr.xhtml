@@ -67,42 +67,48 @@
                             </h:column>
                             <h:column >
                                 <f:facet name="header">pizza_kind</f:facet>
-                                <h:commandLink  value="#{cat.pizza_kind}">
-                                   
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_kind}">
+
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">pizza_size</f:facet>
-                                <h:commandLink  value="#{cat.pizza_size}">
-                                   
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_size}">
+
                                 </h:commandLink>
                             </h:column>
 
                             <h:column >
                                 <f:facet name="header">pizza_price</f:facet>
-                                <h:commandLink  value="#{cat.pizza_price}">
-                                 
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_price}">
+
                                 </h:commandLink>
                             </h:column>
-                             <h:column >
+                            <h:column >
                                 <f:facet name="header">drink_kind</f:facet>
-                                <h:commandLink value="#{cat.drink_kind}">
-                                  
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_kind}">
+
                                 </h:commandLink>
                             </h:column>
-                             <h:column >
+                            <h:column >
                                 <f:facet name="header">drink_size</f:facet>
-                                <h:commandLink value="#{cat.drink_size}">
-                                  
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_size}">
+
                                 </h:commandLink>
                             </h:column>
-                             <h:column >
+                            <h:column >
                                 <f:facet name="header">drink_price</f:facet>
-                                <h:commandLink  value="#{cat.drink_price}">
-                                  
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_price}">
+
                                 </h:commandLink>
                             </h:column>
-                               </h:dataTable>
+                            <h:column >
+                                <f:facet name="header">Delete</f:facet>
+                                <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{orderrController.deleteConfirm(cat)}">
+
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
                     </h:form>
                 </div>
                 <div class="col-md-5">
@@ -121,24 +127,48 @@
                             <h:inputText styleClass="form-control" value="#{orderrController.category.pizza_size}"/>
                             <label for="input Name">pizza_price :</label>
                             <h:inputText styleClass="form-control" value="#{orderrController.category.pizza_price}"/>
-                             <label for="input Name">drink_kind :</label>
-                             <h:inputText styleClass="form-control" value="#{orderrController.category.drink_kind}"/>
-                             <label for="input Name">drink_size :</label>
-                             <h:inputText styleClass="form-control" value="#{orderrController.category.drink_size}"/>
-                             <label for="input Name">drink_price :</label>
-                             <h:inputText styleClass="form-control" value="#{orderrController.category.drink_price}"/>
+                            <label for="input Name">drink_kind :</label>
+                            <h:inputText styleClass="form-control" value="#{orderrController.category.drink_kind}"/>
+                            <label for="input Name">drink_size :</label>
+                            <h:inputText styleClass="form-control" value="#{orderrController.category.drink_size}"/>
+                            <label for="input Name">drink_price :</label>
+                            <h:inputText styleClass="form-control" value="#{orderrController.category.drink_price}"/>
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{orderrController.update()}">
+
+                                </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{orderrController.create()}">
+
                                 </h:commandButton>
                             </div>
                         </div>                
                     </h:form>
                 </div>
+
+                <div class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <h:panelGroup layout="block" class="modal-content" id="delete-model">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete Conformation</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-footer">
+                                <h:form>
+                                    <h:commandButton action="#{orderrController.delete}" value="Confirm" styleClass="btn btn-danger">
+
+                                    </h:commandButton>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </h:form>
+                            </div>
+                        </h:panelGroup>
+                    </div>
+                </div>
             </div>
-            
-        </div>
     </h:body>
 </html>
 

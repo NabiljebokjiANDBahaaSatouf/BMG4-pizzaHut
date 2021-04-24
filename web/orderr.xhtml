@@ -70,40 +70,45 @@
                             </h:column>
                             <h:column >
                                 <f:facet name="header">pizza_kind</f:facet>
-                                <h:commandLink  value="#{cat.pizza_kind}">
-                                   
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_kind}">
+                                    
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">pizza_size</f:facet>
-                                <h:commandLink  value="#{cat.pizza_size}">
-                                   
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_size}">
+                                    
                                 </h:commandLink>
                             </h:column>
 
                             <h:column >
                                 <f:facet name="header">pizza_price</f:facet>
-                                <h:commandLink  value="#{cat.pizza_price}">
-                                  
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_price}">
+                                    
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_kind</f:facet>
-                                <h:commandLink  value="#{cat.drink_kind}">
-                                   
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_kind}">
+                                  
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_size</f:facet>
-                                <h:commandLink  value="#{cat.drink_size}">
-                          
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_size}">
+                                    
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_price</f:facet>
-                                <h:commandLink  value="#{cat.drink_price}">
-                                    <f:ajax execute="@this" render="category-form"/>
+                                <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_price}">
+                                   
                                 </h:commandLink>
+                            </h:column>
+                            <h:column >
+                                <f:facet name="header">Delete</f:facet>
+                                <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{orderrController.deleteConfirm(cat)}">
+                                </h:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -134,8 +139,10 @@
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{orderrController.update()}">
+                                </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{orderrController.create}">
+                                  
                                 </h:commandButton>
                             </div>
                         </div>                

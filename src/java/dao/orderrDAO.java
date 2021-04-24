@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -48,34 +48,34 @@ public class orderrDAO {
         return CategoryList;
     }
 
-    //    public List<orderr> getCategories() {
-    //        List<orderr> CategoryList = new ArrayList();
-    //        try {
-    //            /*
-    //            Connection
-    //            Statement
-    //            ResultSet
-    //             */
-    //            Statement st = this.getConnection().createStatement();
-    //            ResultSet rs = st.executeQuery("select * from orderr");
-    //            while (rs.next()) {
-    //                 orderr tmep = new orderr();
-    //                // System.out.println( rs.getString("name"));
-    //                orderr tmp = new orderr(rs.getInt("orderr_id")
-    //                       ,  rs.getString("pizza_kind"), rs.getString("pizza_size"),
-    //                         rs.getInt("pizza_price"), rs.getString("drink_kind"),
-    //                         rs.getString("drink_size"),
-    //                         rs.getInt("drink_price"));
-    //                CategoryList.add(tmp);
-    //                System.out.println(tmp);
-    //            }
-    //        } catch (SQLException ex) {
-    //            System.out.println(ex.getMessage());
-    //        }
-    //        return CategoryList;
-    //    }
-    //     
-    //    
+//    public List<orderr> getCategories() {
+//        List<orderr> CategoryList = new ArrayList();
+//        try {
+//            /*
+//            Connection
+//            Statement
+//            ResultSet
+//             */
+//            Statement st = this.getConnection().createStatement();
+//            ResultSet rs = st.executeQuery("select * from orderr");
+//            while (rs.next()) {
+//                 orderr tmep = new orderr();
+//                // System.out.println( rs.getString("name"));
+//                orderr tmp = new orderr(rs.getInt("orderr_id")
+//                       ,  rs.getString("pizza_kind"), rs.getString("pizza_size"),
+//                         rs.getInt("pizza_price"), rs.getString("drink_kind"),
+//                         rs.getString("drink_size"),
+//                         rs.getInt("drink_price"));
+//                CategoryList.add(tmp);
+//                System.out.println(tmp);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return CategoryList;
+//    }
+//     
+//    
     public void insert(orderr orderr, int selectedrestaurant) {
         try {
             PreparedStatement pst = this.getConnection().prepareStatement("insert into orderr"
@@ -98,6 +98,46 @@ public class orderrDAO {
         }
     }
 
+//    public void delete(orderr cat) {
+//        try {
+//            Statement st = this.getConnection().createStatement();
+//            st.executeUpdate("delete from orderr where orderr_id =" + cat.getOrderr_id());
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//    } 
+    public void delete(orderr cat) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from orderr where orderr_id=?");
+            pst.setInt(1, cat.getOrderr_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+//   
+    public void update(orderr orderr, int selectedrestaurant) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("update orderr"
+                    + " set orderr_id=?,restaurant_id=?,pizza_kind=?,pizza_size=?,pizza_price=?"
+                    + ",drink_kind=?,drink_size=?,drink_price=? where orderr_id=?");
+
+            pst.setInt(1, orderr.getOrderr_id());
+            pst.setInt(2, selectedrestaurant);
+            pst.setString(3, orderr.getPizza_kind());
+            pst.setString(4, orderr.getPizza_size());
+            pst.setInt(5, orderr.getPizza_price());
+            pst.setString(6, orderr.getDrink_kind());
+            pst.setString(7, orderr.getDrink_size());
+            pst.setInt(8, orderr.getDrink_price());
+            pst.setInt(9, orderr.getOrderr_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public Connector getConnector() {
         if (this.connector == null) {
             this.connector = new Connector();
@@ -111,6 +151,8 @@ public class orderrDAO {
         }
         return connection;
     }
+
+   
 
     public restaurantDAO getRestaurantDAO() {
         if (this.restaurantdao == null) {

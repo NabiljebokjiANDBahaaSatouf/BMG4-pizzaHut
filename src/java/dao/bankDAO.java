@@ -57,6 +57,26 @@ public class bankDAO {
         }
     }
 
+    public void delete(bank cat) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from bank where bank_id=" + cat.getBank_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(bank bank) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update bank set payments_id='" + bank.getPayments_id() + "'where bank_id=" + bank.getBank_id());
+            st.executeUpdate("update bank set amount='" + bank.getAmount() + "'where bank_id=" + bank.getBank_id());
+            st.executeUpdate("update bank set credit_card_type='" + bank.getCridit_card_type() + "'where bank_id=" + bank.getBank_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public Connector getConnector() {
         if (this.connector == null) {
             this.connector = new Connector();

@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -27,9 +27,9 @@ public class paymentsDAO {
         List<payments> CategoryList = new ArrayList();
         try {
             /*
-                    Connection
-                    Statement
-                    ResultSet
+            Connection
+            Statement
+            ResultSet
              */
             Statement st = this.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select * from payments");
@@ -53,8 +53,32 @@ public class paymentsDAO {
                     + " values (" + payments.getPayments_id() + "," + payments.getTo_home_id() + "," + payments.getTable_id()
                     + ",'" + payments.getBankOrCash() + "')");
 
+           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    public void delete(payments cat) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from payments where payments_id =" + cat.getPayments_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(payments payments) {
+
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update payments set to_home_id='" + payments.getTo_home_id() + "'where payments_id=" + payments.getPayments_id());
+            st.executeUpdate("update payments set table_id='" + payments.getTable_id() + "'where payments_id=" + payments.getPayments_id());
+            st.executeUpdate("update payments set bankOrCash='" + payments.getBankOrCash() + "'where payments_id=" + payments.getPayments_id());
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
         }
     }
 

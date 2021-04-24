@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -9,6 +9,7 @@ import dao.customer_tableDAO;
 import dao.restaurantDAO;
 import entity.customer_table;
 import entity.restaurant;
+import entity.table_order;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ *
+ * @author nabilo
+ */
 @Named
 @SessionScoped
 public class customer_tableController implements Serializable {
@@ -60,15 +65,37 @@ public class customer_tableController implements Serializable {
         this.restaurantlist = restaurantlist;
     }
 
+    public void updateFrom(customer_table cat) {
+        this.customer_table = cat;
+        this.selectedrestaurant = this.customer_table.getRestaurant().getRestaurant_id();
+    }
+
+    public void update() {
+        this.getCdao().update(this.customer_table, selectedrestaurant);
+        this.customer_table = new customer_table();
+    }
+
     public String clearForm() {
         this.customer_table = new customer_table();
         return "customer_table";
+    }
+
+    public String delete() {
+        this.getCdao().delete(this.customer_table);
+        this.customer_table = new customer_table();
+        return "customer_table";
+
     }
 
     public void create() {
         this.getCdao().insert(this.customer_table, selectedrestaurant, selectedtable_order);
         this.customer_table = new customer_table();
 
+    }
+
+    public String deleteConfirm(customer_table cat) {
+        this.customer_table = cat;
+        return "delete_customer_table";
     }
 
     public customer_tableController() {

@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -25,21 +25,21 @@ public class restaurantDAO {
     private Connector connector;
     private Connection connection;
 
-    //    public List<restaurant> findALL() {
-    //        List<restaurant> CategoryList = new ArrayList<>() ;
-    //        try {
-    //            Statement st = this.getConnection().createStatement();
-    //            ResultSet rs = st.executeQuery("select * from restaurant");
-    //            while (rs.next()) {
-    //                restaurant tmp = new restaurant(rs.getInt("restaurant_id"), rs.getString("branch"));
-    //                CategoryList.add(tmp);
-    //                System.out.println(tmp);
-    //            }
-    //        } catch (SQLException ex) {
-    //            System.out.println(ex.getMessage());
-    //        }
-    //        return CategoryList;
-    //    }
+//    public List<restaurant> findALL() {
+//        List<restaurant> CategoryList = new ArrayList<>() ;
+//        try {
+//            Statement st = this.getConnection().createStatement();
+//            ResultSet rs = st.executeQuery("select * from restaurant");
+//            while (rs.next()) {
+//                restaurant tmp = new restaurant(rs.getInt("restaurant_id"), rs.getString("branch"));
+//                CategoryList.add(tmp);
+//                System.out.println(tmp);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return CategoryList;
+//    }
     public List<restaurant> findALL() {
         List<restaurant> CategoryList = new ArrayList<>();
         try {
@@ -82,6 +82,27 @@ public class restaurantDAO {
                     + " values (" + restaurant.getRestaurant_id() + ",'" + restaurant.getBranch() + "')");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+
+    public void delete(restaurant cat) {
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from restaurant where restaurant_id =" + cat.getRestaurant_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(restaurant restaurant) {
+        try {
+
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update restaurant set branch='" + restaurant.getBranch() + "'where restaurant_id=" + restaurant.getRestaurant_id());
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
         }
     }
 

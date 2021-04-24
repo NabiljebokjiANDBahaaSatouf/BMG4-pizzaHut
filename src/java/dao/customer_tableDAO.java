@@ -1,16 +1,18 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
 import entity.customer_table;
+import entity.restaurant;
 import entity.table_order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.Connector;
@@ -66,6 +68,31 @@ public class customer_tableDAO {
                     + " (table_id,customer_table_id) values(?,?) ");
             pst.setInt(1, customer_table.getCustomer_table_id());
             pst.setInt(2, customer_table.getCustomer_table_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void delete(customer_table cat) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from customer_table where customer_table_id=?");
+            pst.setInt(1, cat.getCustomer_table_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(customer_table customer_table, int selectedrestaurant) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("update customer_table"
+                    + " set customer_table_id=?, restaurant_id=? ,name=? where customer_table_id=?");
+
+            pst.setInt(1, customer_table.getCustomer_table_id());
+            pst.setInt(2, selectedrestaurant);
+            pst.setString(3, customer_table.getName());
+            pst.setInt(4, customer_table.getCustomer_table_id());
             pst.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -29,9 +29,9 @@ public class to_homeDAO {
         List<to_home> CategoryList = new ArrayList();
         try {
             /*
-                    Connection
-                    Statement
-                    ResultSet
+            Connection
+            Statement
+            ResultSet
              */
             Statement st = this.getConnection().createStatement();
             ResultSet rs = st.executeQuery("select * from to_home");
@@ -67,6 +67,31 @@ public class to_homeDAO {
             pst.setInt(1, to_home.getTo_home_id());
             pst.setInt(2, to_home.getTo_home_id());
             pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+
+        }
+    }
+
+    public void delete(to_home cat) {
+
+        try {
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("delete from to_home where to_home_id=" + cat.getTo_home_id());
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(to_home to_home) {
+
+        try {
+
+            Statement st = this.getConnection().createStatement();
+            st.executeUpdate("update to_home set name='" + to_home.getName() + "'where to_home_id=" + to_home.getTo_home_id());
+            st.executeUpdate("update to_home set Address='" + to_home.getAddress() + "'where to_home_id=" + to_home.getTo_home_id());
+            st.executeUpdate("update to_home set Email='" + to_home.getEmail() + "'where to_home_id=" + to_home.getTo_home_id());
+            st.executeUpdate("update to_home set Phone='" + to_home.getPhone() + "'where to_home_id=" + to_home.getTo_home_id());
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 

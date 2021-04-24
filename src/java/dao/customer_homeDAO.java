@@ -1,7 +1,7 @@
 /*
-         * To change this license header, choose License Headers in Project Properties.
-         * To change this template file, choose Tools | Templates
-         * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao;
 
@@ -71,6 +71,33 @@ public class customer_homeDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 
+        }
+    }
+
+    public void delete(customer_home cat) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("delete from customer_home where customer_home_id=?");
+            pst.setInt(1, cat.getCustomer_home_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void update(customer_home customer_home, int selectedrestaurant) {
+        try {
+            PreparedStatement pst = this.getConnection().prepareStatement("update customer_home"
+                    + " set customer_home_id=?, restaurant_id=? ,Name=? ,Address=? ,Email=?,phone=? where customer_home_id=?");
+            pst.setInt(1, customer_home.getCustomer_home_id());
+            pst.setInt(2, selectedrestaurant);
+            pst.setString(3, customer_home.getName());
+            pst.setString(4, customer_home.getAddress());
+            pst.setString(5, customer_home.getEmail());
+            pst.setInt(6, customer_home.getPhone());
+            pst.setInt(7, customer_home.getCustomer_home_id());
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
