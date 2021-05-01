@@ -71,43 +71,44 @@
                             <h:column >
                                 <f:facet name="header">pizza_kind</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_kind}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">pizza_size</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_size}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
 
                             <h:column >
                                 <f:facet name="header">pizza_price</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.pizza_price}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_kind</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_kind}">
-                                  
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_size</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_size}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">drink_price</f:facet>
                                 <h:commandLink action="#{orderrController.updateFrom(cat)}" value="#{cat.drink_price}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{orderrController.deleteConfirm(cat)}">
+                                    <f:ajax execute="@this" render="category-model"/>   
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -140,9 +141,10 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{orderrController.update()}">
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{orderrController.create}">
-                                  
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                

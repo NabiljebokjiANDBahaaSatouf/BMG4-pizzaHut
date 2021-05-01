@@ -71,26 +71,26 @@
                             <h:column >
                                 <f:facet name="header">Name</f:facet>
                                 <h:commandLink action="#{contactController.updateFrom(cat)}" value="#{cat.name}">
-                                  
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Address</f:facet>
                                 <h:commandLink action="#{contactController.updateFrom(cat)}" value="#{cat.address}">
-                                  
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
 
                             <h:column >
                                 <f:facet name="header">Phone</f:facet>
                                 <h:commandLink action="#{contactController.updateFrom(cat)}" value="#{cat.phone}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{contactController.deleteConfirm(cat)}">
-                                   
+                                    <f:ajax execute="@this" render="category-model"/>   
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -101,6 +101,7 @@
                         <div class="form-group">
 
                             <h:inputHidden value="#{contactController.category.contact_id}"/>
+
                             <label for="input Name">contact ID :</label>
                             <h:inputText styleClass="form-control" value="#{contactController.category.contact_id}"/>
                             <label for="input Name">Restaurant_id :</label>
@@ -114,9 +115,11 @@
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                <h:commandButton  class="btn btn-info" value="Update" action="#{contactController.update()}">                             
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{contactController.update()}">
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
-                                <h:commandButton  class="btn btn-primary" value="Create" action="#{contactController.create()}">                              
+                                <h:commandButton  class="btn btn-primary" value="Create" action="#{contactController.create()}">
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -132,10 +135,22 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>Customer ID : </br>#{contactController.category.contact_id}<br/>
+                    <br>Restaurant_id : </br>#{contactController.category.restaurant_id}<br/>
+                    <br>Name  : </br>#{contactController.category.name}<br/>
+                    <br>Address  : </br>#{contactController.category.address}<br/>
+                    <br>Phone  : </br>#{contactController.category.phone}<br/>
+                                </pre>
+                            </p>
+                        </div>
                         <div class="modal-footer">
                             <h:form>
                                 <h:commandButton action="#{contactController.delete}" value="Confirm" styleClass="btn btn-danger">
-                                                   
+                                    <f:ajax execute="@this" render="category-table category-form"/>                              
                                 </h:commandButton>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </h:form>

@@ -49,6 +49,7 @@
                             <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="to_home" value="to_home"/>
                             </li>
+
                         </ul> 
                     </h:form>
                 </div>
@@ -66,25 +67,25 @@
                             <h:column >
                                 <f:facet name="header">orderr_id</f:facet>
                                 <h:commandLink action="#{deliveryController.updateFrom(cat)}" value="#{cat.orderr_id}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">delivery_pickup</f:facet>
                                 <h:commandLink action="#{deliveryController.updateFrom(cat)}" value="#{cat.delivery_pickup}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">time_deliverd </f:facet>
                                 <h:commandLink action="#{deliveryController.updateFrom(cat)}" value="#{cat.time_deliverd}">
-                                    
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{deliveryController.deleteConfirm(cat)}">
-                                    
+                                    <f:ajax execute="@this" render="category-model"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -108,10 +109,10 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{deliveryController.update()}">
-                                    
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{deliveryController.create()}">
-                                    
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -127,10 +128,22 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>ID : </br>#{deliveryController.category.delivery_id}<br/>
+                    <br>orderr_id : </br>#{deliveryController.category.orderr_id}<br/>
+                    <br>delivery_pickup  : </br>#{deliveryController.category.delivery_pickup}<br/>
+                    <br>time_deliverd  : </br>#{deliveryController.category.time_deliverd}<br/>
+                   
+                                </pre>
+                            </p>
+                        </div>
                         <div class="modal-footer">
                             <h:form>
-                                <h:commandButton action="#{deliveryController.delete}" value="Confirm" styleClass="btn btn-danger">                                                        
+                                <h:commandButton action="#{deliveryController.delete}" value="Confirm" styleClass="btn btn-danger">
+                                    <f:ajax execute="@this" render="category-table category-form"/>                              
                                 </h:commandButton>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </h:form>

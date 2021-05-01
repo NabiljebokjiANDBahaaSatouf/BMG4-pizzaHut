@@ -67,19 +67,19 @@
                             <h:column >
                                 <f:facet name="header">payments ID</f:facet>
                                 <h:commandLink action="#{cashController.updateFrom(cat)}" value="#{cat.payments_id}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Amount</f:facet>
                                 <h:commandLink action="#{cashController.updateFrom(cat)}" value="#{cat.amount}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{cashController.deleteConfirm(cat)}">
-                                   
+                                    <f:ajax execute="@this" render="category-model"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -88,6 +88,7 @@
                 <div class="col-md-4">
                     <h:form id ="category-form">
                         <div class="form-group">
+
                             <h:inputHidden value="#{cashController.category.cash_id}"/>
                             <label for="input Name"> ID :</label>
                             <h:inputText styleClass="form-control" value="#{cashController.category.cash_id}"/>
@@ -98,9 +99,11 @@
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
-                                <h:commandButton  class="btn btn-info" value="Update" action="#{cashController.update()}">                                    
+                                <h:commandButton  class="btn btn-info" value="Update" action="#{cashController.update()}">
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
-                                <h:commandButton  class="btn btn-primary" value="Create" action="#{cashController.create()}">                                  
+                                <h:commandButton  class="btn btn-primary" value="Create" action="#{cashController.create()}">
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -115,11 +118,21 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>                     
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>ID : </br>#{cashController.category.cash_id}<br/>
+                    <br>payments_id  : </br>#{cashController.category.payments_id}<br/>
+                    <br>amount  : </br>#{cashController.category.amount}<br/>
+                                </pre>
+                            </p>
+                        </div>
                         <div class="modal-footer">
                             <h:form>
                                 <h:commandButton action="#{cashController.delete}" value="Confirm" styleClass="btn btn-danger">
-                                                      
+                                    <f:ajax execute="@this" render="category-table category-form"/>                              
                                 </h:commandButton>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </h:form>

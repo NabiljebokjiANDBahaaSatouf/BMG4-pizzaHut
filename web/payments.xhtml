@@ -67,25 +67,25 @@
                             <h:column >
                                 <f:facet name="header">to_home_id</f:facet>
                                 <h:commandLink action="#{paymentsController.updateFrom(cat)}" value="#{cat.to_home_id}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">table_id</f:facet>
                                 <h:commandLink action="#{paymentsController.updateFrom(cat)}" value="#{cat.table_id}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">bankOrCash</f:facet>
                                 <h:commandLink action="#{paymentsController.updateFrom(cat)}" value="#{cat.bankOrCash}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{paymentsController.deleteConfirm(cat)}">
-
+                                    <f:ajax execute="@this" render="category-model"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -108,36 +108,48 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{paymentsController.update()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{paymentsController.create()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
                     </h:form>
-                </div>
             </div>
-            <div class="modal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <h:panelGroup layout="block" class="modal-content" id="delete-model">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Delete Conformation</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-
-                        <div class="modal-footer">
-                            <h:form>
-                                <h:commandButton action="#{paymentsController.delete}" value="Confirm" styleClass="btn btn-danger">
-                                </h:commandButton>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </h:form>
-                        </div>
-                    </h:panelGroup>
-                </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <h:panelGroup layout="block" class="modal-content" id="delete-model">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Conformation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Are you sure you want to delete? 
+                            <pre>
+                    <br>ID : </br>#{paymentsController.category.payments_id}<br/>
+                    <br>to_home_id  : </br>#{paymentsController.category.to_home_id}<br/>
+                    <br>table_id  : </br>#{paymentsController.category.table_id}<br/>
+                    <br>bankOrCash  : </br>#{paymentsController.category.bankOrCash}<br/>
+                   
+                            </pre>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <h:form>
+                            <h:commandButton action="#{paymentsController.delete}" value="Confirm" styleClass="btn btn-danger">
+                                <f:ajax execute="@this" render="category-table category-form"/>                              
+                            </h:commandButton>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </h:form>
+                    </div>
+                </h:panelGroup>
             </div>
+        </div>
         </div>
     </h:body>
 

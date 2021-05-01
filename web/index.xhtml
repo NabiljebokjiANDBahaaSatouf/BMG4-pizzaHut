@@ -49,6 +49,7 @@
                             <li class="nav-item active">
                                 <h:commandLink styleClass="nav-link" action="to_home" value="to_home"/>
                             </li>
+
                         </ul> 
                     </h:form>
                 </div>
@@ -66,19 +67,19 @@
                             <h:column >
                                 <f:facet name="header">restaurant_id</f:facet>
                                 <h:commandLink action="#{restaurantController.updateFrom(cat)}" value="#{cat.restaurant_id}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">branch</f:facet>
                                 <h:commandLink action="#{restaurantController.updateFrom(cat)}" value="#{cat.branch}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{restaurantController.deleteConfirm(cat)}">
-
+                                    <f:ajax execute="@this" render="category-model"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -99,10 +100,10 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{restaurantController.update()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{restaurantController.create()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -118,10 +119,20 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>ID : </br>#{restaurantController.category.restaurant_id}<br/>
+                    <br>branch  : </br>#{restaurantController.category.branch}<br/>
+                   
+                                </pre>
+                            </p>
+                        </div>
                         <div class="modal-footer">
                             <h:form>
                                 <h:commandButton action="#{restaurantController.delete}" value="Confirm" styleClass="btn btn-danger">
-
+                                    <f:ajax execute="@this" render="category-table category-form"/>                              
                                 </h:commandButton>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </h:form>
@@ -131,6 +142,7 @@
             </div>
         </div>
     </h:body>
+
 
 </html>
 

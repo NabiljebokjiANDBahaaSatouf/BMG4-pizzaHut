@@ -66,30 +66,32 @@
                             </h:column>
                             <h:column >
                                 <f:facet name="header">payments ID</f:facet>
-                                <h:commandLink action="#{bankController.updateFrom(cat)}" value="#{cat.payments_id}">                                  
+                                <h:commandLink action="#{bankController.updateFrom(cat)}" value="#{cat.payments_id}">
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Amount</f:facet>
-                                <h:commandLink action="#{bankController.updateFrom(cat)}" value="#{cat.amount}">                                  
+                                <h:commandLink action="#{bankController.updateFrom(cat)}" value="#{cat.amount}">
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">cridit card type</f:facet>
                                 <h:commandLink action="#{bankController.updateFrom(cat)}" value="#{cat.cridit_card_type}">
-                                   
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{bankController.deleteConfirm(cat)}">
-                                     
+                                    <f:ajax execute="@this" render="category-model"/>    
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
                     </h:form>
                 </div>
-              <div class="col-md-5">
+                <div class="col-md-5">
                     <h:form id ="category-form">
                         <div class="form-group">
 
@@ -107,10 +109,10 @@
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{bankController.update()}">
-                                  
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{bankController.create()}">
-                                    
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -125,6 +127,18 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>ID : </br>#{bankController.category.bank_id}<br/>
+                    <br>payments_id  : </br>#{bankController.category.payments_id}<br/>
+                    <br>amount  : </br>#{bankController.category.amount}<br/>
+                    <br>cridit_card_type  : </br>#{bankController.category.cridit_card_type}<br/>
+                   
+                                </pre>
+                            </p>
                         </div>
                         <div class="modal-footer">
                             <h:form>
@@ -142,3 +156,4 @@
 
 
 </html>
+

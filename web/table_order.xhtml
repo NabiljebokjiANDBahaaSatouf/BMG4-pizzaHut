@@ -67,19 +67,19 @@
                             <h:column >
                                 <f:facet name="header">table_number</f:facet>
                                 <h:commandLink action="#{table_orderController.updateFrom(cat)}" value="#{cat.table_number}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">orderr_id</f:facet>
                                 <h:commandLink action="#{table_orderController.updateFrom(cat)}" value="#{cat.orderr_id}">
-
+                                    <f:ajax execute="@this" render="category-form"/>
                                 </h:commandLink>
                             </h:column>
                             <h:column >
                                 <f:facet name="header">Delete</f:facet>
                                 <h:commandButton  onclick="$('.modal').modal('show')" class="btn btn-sm btn-danger" value="Delete" action="#{table_orderController.deleteConfirm(cat)}">
-
+                                    <f:ajax execute="@this" render="category-model"/>
                                 </h:commandButton>
                             </h:column>
                         </h:dataTable>
@@ -97,15 +97,15 @@
                             <h:inputText styleClass="form-control" value="#{table_orderController.category.orderr_id}"/>
                             <label for="input Name">table_number :</label>
                             <h:inputText styleClass="form-control" value="#{table_orderController.category.table_number}"/>
-
+                            
                         </div>
                         <div class="form-group">
                             <div class="btn-group">
                                 <h:commandButton  class="btn btn-info" value="Update" action="#{table_orderController.update()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                                 <h:commandButton  class="btn btn-primary" value="Create" action="#{table_orderController.create()}">
-
+                                    <f:ajax execute="category-form" render="category-form category-table"/>
                                 </h:commandButton>
                             </div>
                         </div>                
@@ -121,11 +121,20 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
+                        <div class="modal-body">
+                            <p>
+                                Are you sure you want to delete? 
+                                <pre>
+                    <br>table_id : </br>#{table_orderController.category.table_id}<br/>
+                    <br>table_id : </br>#{table_orderController.category.orderr_id}<br/>
+                    <br>table_id  : </br>#{table_orderController.category.table_number}<br/>
+                                </pre>
+                            </p>
+                        </div>
                         <div class="modal-footer">
                             <h:form>
                                 <h:commandButton action="#{table_orderController.delete}" value="Confirm" styleClass="btn btn-danger">
-
+                                    <f:ajax execute="@this" render="category-table category-form"/>                              
                                 </h:commandButton>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </h:form>
