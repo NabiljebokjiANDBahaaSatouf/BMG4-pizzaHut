@@ -53,7 +53,7 @@ public class customer_tableDAO {
 
         try {
             PreparedStatement pst = this.getConnection().prepareStatement("insert into customer_table"
-                    + " (customer_table_id,restaurant_id,name) values(?,?,?)");
+                    + " (customer_table_id,restaurant_id,Name) values(?,?,?)");
             pst.setInt(1, customer_table.getCustomer_table_id());
             pst.setInt(2, selectedrestaurant);
             pst.setString(3, customer_table.getName());
